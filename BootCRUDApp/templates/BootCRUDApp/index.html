@@ -1,5 +1,25 @@
 {% extends 'BootCRUDApp/base.html' %}
-
+{% load static %}
 {% block content %}
-<h1>In the Index Page</h1>
+<section>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Submit</button>
+</form>
+</section>
+
+<aside class="gridContainer">
+    {% for items in saleitems %}
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{ items.imageURL }}" alt="Card image cap">
+            <div class="card-body">
+                <a href="{% url 'edititem' items.id %}"> <h5 class="card-title">{{items.name}}</h5></a>
+                <p class="card-text">{{items.description}}</p>
+                <p class="card-text">{{items.price}}</p>
+          <hr/>
+        </div>
+    </div>
+    {% endfor %}
+</aside>
 {% endblock content %}
